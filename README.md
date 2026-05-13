@@ -59,7 +59,7 @@ Follow the prompts to select your organization, project and branch.
 xata branch url
 # Copy the connection string
 cp .env.example .env.local
-# Paste the connection string as DATABASE_URL
+# Open .env.local and paste the connection string as the value of DATABASE_URL
 ```
 
 ### 5. Initialize pgroll and run migrations
