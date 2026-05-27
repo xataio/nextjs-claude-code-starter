@@ -1,30 +1,63 @@
-<p align="center">
-  <img src="public/xata-logo.svg" alt="Xata" width="80" />
-</p>
+<div align="center">
+  <a href="https://xata.io">
+    <img src="public/xata-logo.svg" width="80" alt="Xata" />
+  </a>
 
-<h1 align="center">Next.js + Xata + Claude Code Starter</h1>
+  <h1>Next.js + Xata + Claude Code Starter</h1>
 
-<p align="center">
-  Production-ready starter for building AI apps with zero-downtime migrations, instant branches and anonymized cloning.
-</p>
+  <p>
+    <strong>Production-ready Next.js + Postgres starter for AI apps. Zero-downtime migrations, instant database branches, PII-safe prod clones, and 6 Claude Code skills.</strong>
+  </p>
 
-<p align="center">
-  <a href="https://xata.io/documentation">Docs</a> · <a href="https://github.com/xataio/pgroll">pgroll</a> · <a href="https://xata.io/discord">Discord</a>
-</p>
+  <p>
+    <a href="https://xata.io/blog/building-production-ai-apps-with-xata-and-claude-code">Tutorial</a> ·
+    <a href="https://xata.io/documentation">Docs</a> ·
+    <a href="https://github.com/xataio/pgroll">pgroll</a>
+  </p>
+
+  <p>
+    <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxataio%2Fnextjs-claude-code-starter&env=DATABASE_URL&envDescription=Connection%20string%20from%20%60xata%20branch%20url%60&envLink=https%3A%2F%2Fxata.io%2Fdocumentation%2Fcli&project-name=nextjs-claude-code-starter&repository-name=nextjs-claude-code-starter">
+      <img src="https://vercel.com/button" alt="Deploy with Vercel" />
+    </a>
+  </p>
+</div>
 
 ---
 
 ## Features
 
-- **Zero-downtime migrations** — pgroll's expand-contract pattern lets old and new code run simultaneously
-- **Instant database branches** — copy-on-write isolation for every feature, no shared dev database chaos
-- **Anonymized production cloning** — debug with real data distributions without exposing PII
-- **Claude Code commands** — branching, migrating and cloning as part of your agentic workflow
+- ⚡ **Zero-downtime migrations** with pgroll's expand-contract pattern (old and new schemas serve traffic simultaneously)
+- 🌳 **Instant database branches** via copy-on-write (ready in seconds, no storage duplication)
+- 🔒 **Anonymized production clones** with referential integrity preserved across foreign keys
+- 🤖 **6 Claude Code skills** for branch, migrate, clone, and rollback workflows
+- 🐘 **Next.js 14 + raw Postgres** (no ORM, raw `postgres` driver)
+- 📦 **MIT licensed**, ready to fork
+
+## Claude Code skills
+
+Open Claude Code in this directory and use these slash commands, or describe the workflow in plain English and Claude Code will run the right Xata CLI sequence.
+
+| Command | Description |
+| --- | --- |
+| `/project:setup` | Connect to Xata and configure the project |
+| `/project:branch-create` | Create an isolated database branch |
+| `/project:migration-start` | Start a zero-downtime migration |
+| `/project:migration-complete` | Complete an ongoing migration |
+| `/project:migration-rollback` | Roll back a failed migration |
+| `/project:clone-production` | Clone production with PII anonymization |
+
+[![Claude Code creating a Xata branch](public/xata-claude-branch-demo.png)](public/xata-claude-branch-demo.png)
+
+*Claude Code running `/branch-create`: names the branch, creates it, waits for ready, and returns the connection string.*
+
+The skills are markdown files in `.claude/skills/`. Fork them, extend them, or write your own for other workflows.
+
+---
 
 ## Prerequisites
 
 - Node.js 18+
-- A [Xata account](https://console.xata.io)
+- A [Xata account](https://console.xata.io/)
 - [Xata CLI](https://xata.io/documentation/cli) installed
 
 ## Quick start
@@ -51,7 +84,7 @@ xata auth login
 xata init
 ```
 
-Follow the prompts to select your organization, project and branch.
+Follow the prompts to select your organization, project, and branch.
 
 ### 4. Set up your environment
 
@@ -82,7 +115,7 @@ xata roll complete
 npm run dev
 ```
 
-You'll see users and teams tables — empty but with the correct columns. Add a test user:
+You'll see users and teams tables, empty but with the correct columns. Add a test user:
 
 ```bash
 psql $(xata branch url) -c "INSERT INTO users (email, name) VALUES ('test@example.com', 'Test User');"
@@ -90,38 +123,18 @@ psql $(xata branch url) -c "INSERT INTO users (email, name) VALUES ('test@exampl
 
 ---
 
-## Claude Code skills
-
-This starter includes Claude Code skills for Xata workflows. Open Claude Code in this directory and use these slash commands:
-
-| Command | Description |
-|---------|-------------|
-| `/project:setup` | Connect to Xata and configure the project |
-| `/project:branch-create` | Create an isolated database branch |
-| `/project:migration-start` | Start a zero-downtime migration |
-| `/project:migration-complete` | Complete an ongoing migration |
-| `/project:migration-rollback` | Roll back a failed migration |
-| `/project:clone-production` | Clone production with PII anonymization |
-
-<p align="center">
-  <img src="public/xata-claude-branch-demo.png" alt="Claude Code creating a Xata branch" width="700" />
-</p>
-<p align="center"><em>Claude Code running /branch-create — names the branch, creates it, waits for ready and returns the connection string.</em></p>
-
----
-
 ## Project structure
 
 ```
 .
-├── .claude/skills/      # Claude Code slash command skills
+├── .claude/skills/       # Claude Code slash command skills
 ├── migrations/           # pgroll migration files (YAML)
 │   ├── 001_create_users.yaml
 │   ├── 002_add_role.yaml
 │   └── 003_add_teams.yaml
 ├── src/
-│   ├── app/             # Next.js app router
-│   └── lib/             # Database connection (postgres driver)
+│   ├── app/              # Next.js app router
+│   └── lib/              # Database connection (postgres driver)
 ├── .env.example
 └── package.json
 ```
@@ -131,7 +144,7 @@ This starter includes Claude Code skills for Xata workflows. Open Claude Code in
 ## Xata CLI reference
 
 | Command | What it does |
-|---------|--------------|
+| --- | --- |
 | `xata auth login` | Authenticate with Xata |
 | `xata init` | Link project to current folder |
 | `xata branch create --name <name>` | Create an isolated database branch |
@@ -146,12 +159,22 @@ This starter includes Claude Code skills for Xata workflows. Open Claude Code in
 
 ---
 
+## Acknowledgments
+
+Built on the shoulders of:
+
+- [pgroll](https://github.com/xataio/pgroll) — Apache 2.0, zero-downtime Postgres migrations
+- [pgstream](https://github.com/xataio/pgstream) — Apache 2.0, Postgres replication and anonymization
+- [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) — agentic CLI workflows
+- [Next.js](https://nextjs.org/) — the React framework
+
 ## Learn more
 
+- [Building Production AI Apps with Xata and Claude Code](https://xata.io/blog/building-production-ai-apps-with-xata-and-claude-code) (tutorial)
 - [Xata Documentation](https://xata.io/documentation)
 - [pgroll on GitHub](https://github.com/xataio/pgroll)
 - [Data Anonymization](https://xata.io/documentation/core-concepts/data-anonymization)
 
 ## License
 
-MIT
+[MIT](LICENSE)
