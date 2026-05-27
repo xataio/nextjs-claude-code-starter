@@ -11,7 +11,7 @@
 
   <p>
     <a href="https://xata.io/blog/building-production-ai-apps-with-xata-and-claude-code">Tutorial</a> ·
-    <a href="[https://xata.io/documentation](https://xata.io/docs/overview)">Docs</a> ·
+    <a href="https://xata.io/documentation">Docs</a> ·
     <a href="https://github.com/xataio/pgroll">pgroll</a> ·
   </p>
 
